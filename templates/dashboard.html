@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Teacher Dashboard | Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="topbar">
+            <div class="brand">
+                <div class="logo">L</div>
+                <div>
+                    <h1>Teacher Dashboard</h1>
+                    <p>KPIs, student search, reports, and charts</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a class="btn outline" href="/">Home</a>
+                <form action="/logout/" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid3">
+            <div class="kpi">
+                <div class="kpi-title">Total Students</div>
+                <div class="kpi-value">{{ total_students }}</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-title">Total Marks Entries</div>
+                <div class="kpi-value">{{ total_marks }}</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-title">Weak Subjects</div>
+                <div class="kpi-value">{{ weak_subjects_count }}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Student Search</h2>
+
+            <form method="GET" class="search">
+                <input type="text" name="q" placeholder="Search student by name" value="{{ q }}">
+                <button class="btn" type="submit">Search</button>
+            </form>
+
+            {% if q %}
+            <div class="results">
+                <h3>Results</h3>
+                {% if matched_students %}
+                <ul>
+                    {% for s in matched_students %}
+                    <li>
+                        <b>{{ s.name }}</b> (Roll: {{ s.roll_number }})
+                        <a class="link" href="?q={{ q }}&student_id={{ s.id }}">View Report</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No students found.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if selected_student %}
+        <div class="card">
+            <h2>Student Report: {{ selected_student.name }} (Roll: {{ selected_student.roll_number }})</h2>
+
+            <h3>Marks List</h3>
+            {% if marks_list %}
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Score</th>
+                </tr>
+                {% for m in marks_list %}
+                <tr>
+                    <td>{{ m.subject }}</td>
+                    <td>{{ m.score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No marks found for this student.</p>
+            {% endif %}
+
+            <h3>Subject Summary</h3>
+            {% if subject_report %}
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Entries</th>
+                    <th>Average</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                </tr>
+                {% for row in subject_report %}
+                <tr>
+                    <td>{{ row.subject }}</td>
+                    <td>{{ row.entries }}</td>
+                    <td>{{ row.avg|floatformat:2 }}</td>
+                    <td>{{ row.min_score }}</td>
+                    <td>{{ row.max_score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="grid2">
+            <div class="card">
+                <div class="card-head">
+                    <h2>Subject Average Chart</h2>
+                    <a class="link" href="/visualization/bar-chart/" target="_blank">Open</a>
+                </div>
+                <div class="chart-wrap">
+                    <img class="chart chart-small" src="/visualization/bar-chart/?v=1" alt="Bar chart">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">
+                    <h2>Marks Distribution Pie</h2>
+                    <a class="link" href="/visualization/pie-chart/" target="_blank">Open</a>
+                </div>
+                <div class="chart-wrap">
+                    <img class="chart chart-small" src="/visualization/pie-chart/?v=1" alt="Pie chart">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

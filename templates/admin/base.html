@@ -1,0 +1,107 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+        {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }}{% endblock %}
+    </title>
+
+    <!-- Keep Django admin base CSS for widgets/forms behaviour -->
+    <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
+
+    <!-- Your custom admin UI shell -->
+    <link rel="stylesheet" href="{% static 'css/admin_shell.css' %}?v=999">
+
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+</head>
+
+<body class="{% block bodyclass %}admin{% endblock %}">
+    <div class="la-admin">
+
+        <!-- Sidebar -->
+        <aside class="la-side">
+            <div class="la-brand">
+                <div class="la-logo">L</div>
+                <div>
+                    <div class="la-name">Learnalytics</div>
+                    <div class="la-sub">Admin Panel</div>
+                </div>
+            </div>
+
+            <nav class="la-nav">
+                <a class="la-link" href="{% url 'admin:index' %}">Dashboard</a>
+                <a class="la-link" href="/">Home</a>
+                <a class="la-link" href="/teacher/dashboard/">Teacher Dashboard</a>
+
+            </nav>
+
+            <div class="la-user">
+                <div class="la-avatar">{{ request.user.username|default:"A"|slice:":1"|upper }}</div>
+                <div>
+                    <div class="la-username">{{ request.user.username|default:"Admin" }}</div>
+                    <div class="la-role">{% if request.user.is_superuser %}Superuser{% else %}Staff{% endif %}</div>
+                </div>
+            </div>
+
+            <div class="la-side-actions">
+                <a class="la-btn outline" href="{% url 'admin:password_change' %}">Change Password</a>
+
+                <form action="{% url 'admin:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="la-btn danger" type="submit">Logout</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="la-main">
+
+            <!-- Topbar -->
+            <header class="la-top">
+                <div class="la-top-left">
+                    <h1 class="la-title">{% block content_title %}{{ title }}{% endblock %}</h1>
+
+                    {% block breadcrumbs %}
+                    <div class="la-breadcrumbs">
+                        <a href="{% url 'admin:index' %}">Admin</a>
+                        {% if breadcrumbs %} / {{ breadcrumbs }}{% endif %}
+                    </div>
+                    {% endblock %}
+                </div>
+
+                <div class="la-top-right">
+                    {% block usertools %}
+
+                    {% endblock %}
+                </div>
+            </header>
+
+            {% if messages %}
+            <div class="la-messages">
+                {% for message in messages %}
+                <div class="la-msg {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="la-content">
+                {% block content %}
+                {{ content }}
+                {% endblock %}
+            </div>
+
+
+        </main>
+
+    </div>
+
+    {% block footer %}{% endblock %}
+</body>
+
+</html>

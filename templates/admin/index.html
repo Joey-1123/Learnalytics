@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sb-brand">
+                <div class="sb-logo">L</div>
+                <div class="sb-title">
+                    <div class="sb-name">Learnalytics</div>
+                    <div class="sb-sub">Admin Panel</div>
+                </div>
+            </div>
+
+            <nav class="sb-nav">
+                <a class="sb-link active" href="{% url 'admin:index' %}">Dashboard</a>
+                <a class="sb-link" href="/">Home</a>
+                <a class="sb-link" href="/teacher/dashboard/">Teacher Dashboard</a>
+
+            </nav>
+
+            <div class="sb-footer">
+                <div class="userbox">
+                    <div class="avatar">{{ request.user.username|default:"A"|slice:":1"|upper }}</div>
+                    <div class="usertext">
+                        <div class="uname">{{ request.user.username|default:"Admin" }}</div>
+                        <div class="urole">
+                            {% if request.user.is_superuser %}Superuser{% else %}Staff{% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sb-actions">
+                    <a class="sb-btn outline" href="{% url 'admin:password_change' %}">Change Password</a>
+                    <form class="logout-form" action="{% url 'admin:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="sb-btn danger" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div>
+                    <h1 class="h1">Dashboard</h1>
+                    <p class="muted">Manage students, marks, feedback and system users.</p>
+                </div>
+
+                <form class="search" method="get" action="{% url 'admin:index' %}">
+                    <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search apps and models..." />
+                    <button type="submit">Search</button>
+                </form>
+            </header>
+
+            <!-- Quick Actions -->
+            <section class="grid3">
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title">Users</div>
+                        <div class="pill">Auth</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="muted">Manage staff users and permissions.</p>
+                        <div class="btn-row">
+                            <a class="btn" href="{% url 'admin:auth_user_changelist' %}">View Users</a>
+                            <a class="btn outline" href="{% url 'admin:auth_user_add' %}">Add User</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title">Students</div>
+                        <div class="pill">Data</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="muted">Add students and maintain profiles.</p>
+                        <div class="btn-row">
+                            <a class="btn" href="{% url 'admin:students_student_changelist' %}">View Students</a>
+                            <a class="btn outline" href="{% url 'admin:students_student_add' %}">Add Student</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title">Marks</div>
+                        <div class="pill">Scores</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="muted">Enter subject marks for each student.</p>
+                        <div class="btn-row">
+                            <a class="btn" href="{% url 'admin:students_mark_changelist' %}">View Marks</a>
+                            <a class="btn outline" href="{% url 'admin:students_mark_add' %}">Add Marks</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-head">
+                        <div class="card-title">Student Feedbacks</div>
+                        <div class="pill">Feedback</div>
+                    </div>
+                    <div class="card-body">
+                        <p class="muted">View student feedbacks here.</p>
+                        <div class="btn-row">
+                            <a class="btn" href="{% url 'admin:feedback_feedback_changelist' %}">View Feedbacks</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+        </main>
+    </div>
+</body>
+
+</html>

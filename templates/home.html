@@ -1,0 +1,56 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="brand">
+                <div class="logo">L</div>
+                <div class="title">
+                    <h1>Learnalytics</h1>
+                    <p>Student performance analysis, feedback, and reports</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+
+            <!-- 1. Admin -->
+            <div class="card">
+                <h2>Admin Login</h2>
+                <p>Manage students, marks, feedback, and system data using Jazzmin admin panel.</p>
+                <a class="btn" href="/admin/">Go to Admin</a>
+            </div>
+
+            <!-- 2. Teacher Dashboard -->
+            <div class="card">
+                <h2>Teacher Dashboard</h2>
+                <p>View KPIs, weak subjects, charts, and search students to view subject-wise report.</p>
+                <a class="btn" href="/teacher/dashboard/">Open Dashboard</a>
+            </div>
+
+            <!-- 3. Student Feedback -->
+            <div class="card">
+                <h2>Student Feedback</h2>
+                <p>Students can submit difficulty feedback without login. Only this page is public.</p>
+                <a class="btn outline" href="/feedback/">Give Feedback</a>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            © Learnalytics
+        </div>
+
+    </div>
+</body>
+
+</html>
