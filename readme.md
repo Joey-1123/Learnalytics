@@ -262,6 +262,7 @@ Create virtual environment:
 ```
 python -m venv venv
 venv\Scripts\activate
+cd Learnalytics
 ```
 
 Install dependencies:
