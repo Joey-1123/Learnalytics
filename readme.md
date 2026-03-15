@@ -278,11 +278,6 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Create admin account:
-
-```
-python manage.py createsuperuser
-```
 
 Run server:
 
