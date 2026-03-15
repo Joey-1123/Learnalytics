@@ -131,3 +131,6 @@ USE_I18N = True
 USE_TZ = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # for local dev; expand for deployment
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "admin@learnalytics.com"
