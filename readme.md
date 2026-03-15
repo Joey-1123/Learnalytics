@@ -321,13 +321,13 @@ Current system uses simple statistical models. Future improvements could include
 ---
 
 # Author
-
+```
 Shubham Panchal
 Student Developer | AI & Software Enthusiast
 Omkar Tamalwad  
-Student Developer  
+Student Developer | AI STUDENT
 ---
-
+```
 ## License
 This project is open source and available under the MIT License.
 
