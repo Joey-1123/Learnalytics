@@ -12,6 +12,7 @@ class StudentAdmin(admin.ModelAdmin):
     inlines = [MarkInline]
     list_filter = ()
     actions = None
+    
 
 @admin.register(Mark)
 class MarkAdmin(admin.ModelAdmin):
@@ -20,3 +21,4 @@ class MarkAdmin(admin.ModelAdmin):
     search_fields = ("student__name", "subject")
     list_filter = ()
     actions = None
+
