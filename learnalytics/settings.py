@@ -27,11 +27,8 @@ SECRET_KEY = 'django-insecure-jvw62t0#yv)rf=q&k-21gl52433#w@_g@265o2+4qr=25hx2jq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'learnalytics.onrender.com',
-    'localhost',
-    '127.0.0.1',
-]  
+ALLOWED_HOSTS = [*]  
+print("🔥 FINAL ALLOWED_HOSTS =", ALLOWED_HOSTS)
 
 
 # Application definition
@@ -152,3 +149,4 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 CSRF_TRUSTED_ORIGINS = [
     "https://learnalytics.onrender.com"
 ]
+
