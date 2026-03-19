@@ -25,9 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jvw62t0#yv)rf=q&k-21gl52433#w@_g@265o2+4qr=25hx2jq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']  #Remember to change in final
+ALLOWED_HOSTS = [
+    'learnalytics.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]  
 
 
 # Application definition
