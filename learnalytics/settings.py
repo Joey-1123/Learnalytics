@@ -27,8 +27,13 @@ SECRET_KEY = 'django-insecure-jvw62t0#yv)rf=q&k-21gl52433#w@_g@265o2+4qr=25hx2jq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [*]  
-print("🔥 FINAL ALLOWED_HOSTS =", ALLOWED_HOSTS)
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "learnalytics.onrender.com",
+] 
+
+print("FINAL ALLOWED_HOSTS =", ALLOWED_HOSTS)
 
 
 # Application definition
@@ -139,7 +144,6 @@ TIME_ZONE = "Asia/Kolkata"   # better for your project
 USE_I18N = True
 USE_TZ = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # for local dev; expand for deployment
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'admin@learnalytics.com'
