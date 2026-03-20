@@ -1,122 +1,200 @@
-/* home.css */
-
-* {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
+/* 1. CORE STYLES */
 body {
     margin: 0;
-    background: #f6f7fb;
-    color: #111;
+    font-family: Arial, sans-serif;
+    background: #000000;
+    /* Fixed Pure Black */
+    color: #ffffff;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 18px;
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+    padding: 100px 20px;
 }
 
-.header {
-    background: white;
-    border: 1px solid #e8e8ee;
-    border-radius: 12px;
-    padding: 22px;
+/* 2. DYNAMIC SPLIT LOGIN BUTTON */
+.login-split-wrapper {
+    position: relative;
+    width: 240px;
+    height: 50px;
+    margin: 30px auto;
+    overflow: hidden;
+    /* Hides Admin/Teacher until hover */
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
+}
+
+.login-main-label {
+    background: #06b6d4;
+    color: #000000;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.brand {
+.login-choices {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    gap: 14px;
+    transform: translateY(100%);
+    /* Hidden below */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.choice {
+    flex: 1;
+    height: 100%;
+    display: flex;
     align-items: center;
-}
-
-.logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: #111;
-    color: white;
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    font-size: 18px;
-}
-
-.title h1 {
-    margin: 0;
-    font-size: 26px;
-}
-
-.title p {
-    margin: 4px 0 0;
-    color: #555;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
     font-size: 14px;
 }
 
-.grid {
-    margin-top: 22px;
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+.choice.admin {
+    background: #1e293b;
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card {
-    background: white;
-    border: 1px solid #e8e8ee;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+.choice.teacher {
+    background: #06b6d4;
+    color: #000000;
 }
 
-.card h2 {
-    margin: 0 0 8px;
-    font-size: 18px;
+/* Hover Triggers */
+.login-split-wrapper:hover .login-main-label {
+    transform: translateY(-100%);
 }
 
-.card p {
-    margin: 0 0 14px;
-    color: #555;
-    font-size: 14px;
-    line-height: 1.4;
+.login-split-wrapper:hover .login-choices {
+    transform: translateY(0);
 }
 
+.choice.admin:hover {
+    background: #334155;
+}
+
+.choice.teacher:hover {
+    background: #22d3ee;
+}
+
+/* 3. TYPOGRAPHY & BUTTONS */
 .btn {
     display: inline-block;
-    width: 100%;
-    text-align: center;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #111;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
     text-decoration: none;
-    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-secondary {
+    background: #1e293b;
     color: white;
-    background: #111;
+    border: 1px solid #334155;
 }
 
-.btn.outline {
-    background: transparent;
-    color: #111;
+.btn-secondary:hover {
+    background: #334155;
 }
 
-.btn:hover {
-    opacity: 0.92;
+h1 {
+    font-size: 60px;
+    margin: 20px 0;
 }
 
-.footer {
-    margin-top: 18px;
-    color: #666;
-    font-size: 13px;
-    text-align: center;
+.highlight {
+    color: #22d3ee;
 }
 
+/* 4. ANIMATED TEXT SECTION */
+.animated-text {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+}
 
-/* Responsive */
-@media (max-width: 900px) {
-    .grid {
-        grid-template-columns: 1fr;
+.animated-text span {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    animation: slide 10s infinite;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.animated-text span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.animated-text span:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.animated-text span:nth-child(3) {
+    animation-delay: 4s;
+}
+
+.animated-text span:nth-child(4) {
+    animation-delay: 6s;
+}
+
+.animated-text span:nth-child(5) {
+    animation-delay: 8s;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
     }
+
+    10% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 18px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.buttons {
+    margin-top: 20px;
 }
