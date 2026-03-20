@@ -1,0 +1,118 @@
+/* RESET & CORE THEME */
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* Typography */
+.about-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.about-title span {
+    color: #22d3ee;
+}
+
+.about-subtitle {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+/* Sections */
+.about-section {
+    margin-bottom: 80px;
+    width: 100%;
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* Grids */
+.features,
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* Balanced Cards */
+.feature-card,
+.team-card {
+    background: #0a0a0a;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 30px 20px;
+    transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-card:hover,
+.team-card:hover {
+    border-color: #22d3ee;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+}
+
+/* Role Tags for Team */
+.role-tag {
+    background: rgba(34, 211, 238, 0.1);
+    color: #22d3ee;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: fit-content;
+    margin: 0 auto 15px;
+    border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.feature-card h3,
+.team-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.feature-card p,
+.team-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}

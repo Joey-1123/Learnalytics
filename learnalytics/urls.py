@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Apps
+    path('authentication/', include('authentication.urls')),  
     path('feedback/', include('feedback.urls')),
     path('teacher/', include('teacher.urls')),
     path('visualization/', include('visualization.urls')),
@@ -88,4 +89,5 @@ urlpatterns = [
         ),
         name='password_change_done'
     ),
+
 ]
