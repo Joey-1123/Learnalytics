@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jvw62t0#yv)rf=q&k-21gl52433#w@_g@265o2+4qr=25hx2jq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "learnalytics.onrender.com",
+] 
+
+print("FINAL ALLOWED_HOSTS =", ALLOWED_HOSTS)
 
 
 # Application definition
@@ -118,7 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]  # for development; collectstatic will gather from here
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = '/media/'
@@ -136,9 +144,14 @@ TIME_ZONE = "Asia/Kolkata"   # better for your project
 USE_I18N = True
 USE_TZ = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # for local dev; expand for deployment
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'admin@learnalytics.com'
 
 SECRET_KEY = os.getenv("SECRET_KEY")
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://learnalytics.onrender.com"
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
