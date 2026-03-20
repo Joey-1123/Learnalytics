@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin Login | Learnalytics</title>
+    <title>Teacher Login | Learnalytics</title>
     <link rel="stylesheet" href="{% static 'css/admin_login.css' %}">
 </head>
 
@@ -17,38 +17,37 @@
                 <div class="logo">L</div>
                 <div class="brand-text">
                     <h1>Learnalytics</h1>
-                    <p>Admin Panel Login</p>
+                    <p>Teacher Portal</p>
                 </div>
             </div>
 
-            {% if form.errors %}
+            {% if messages %}
+            {% for message in messages %}
             <div class="error-box">
-                Invalid username or password. Please try again.
+                {{ message }}
             </div>
+            {% endfor %}
             {% endif %}
 
-            <form method="post" action="{% url 'admin:login' %}">
+            <form method="post">
                 {% csrf_token %}
 
                 <div class="input-group">
-                    <label for="id_username">Username</label>
-                    {{ form.username }}
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter Teacher ID" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="id_password">Password</label>
-                    {{ form.password }}
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="••••••••" required>
                 </div>
 
-                <input type="hidden" name="next" value="{{ next }}">
+                <button class="btn-login" type="submit">Login to Dashboard</button>
 
-                <button class="btn-login" type="submit">Log in</button>
+                <div class="links">
+                    <a href="{% url 'home' %}" class="link-item">← Back to Home</a>
+                </div>
             </form>
-
-            <div class="links">
-                <a href="{% url 'password_reset' %}" class="link-item">Forgot Password?</a>
-                <a href="/" class="link-item">← Back to Home</a>
-            </div>
         </div>
     </div>
 

@@ -1,56 +1,50 @@
-
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Learnalytics</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
 <body>
+
     <div class="container">
 
-        <div class="header">
-            <div class="brand">
-                <div class="logo">L</div>
-                <div class="title">
-                    <h1>Learnalytics</h1>
-                    <p>Student performance analysis, feedback, and reports</p>
+        <a href="{% url 'about' %}" class="btn btn-secondary">
+            Read about us →
+        </a>
+
+        <h1>
+            <span class="highlight">Learnalytics</span>
+            <div class="animated-text">
+                <span>tracking</span>
+                <span>analytics</span>
+                <span>insights</span>
+                <span>performance</span>
+                <span>reports</span>
+            </div>
+        </h1>
+
+        <p>
+            Managing student data shouldn’t be complicated. Learnalytics helps you track performance, gain insights, and
+            make better decisions with ease.
+        </p>
+
+        <div class="buttons">
+            <div class="login-split-wrapper">
+                <div class="login-main-label">Login here →</div>
+
+                <div class="login-choices">
+                    <a href="/admin/" class="choice admin">Admin</a>
+                    <a href="{% url 'teacher_login' %}" class="choice teacher">Teacher</a>
                 </div>
             </div>
         </div>
 
-        <div class="grid">
-
-            <!-- 1. Admin -->
-            <div class="card">
-                <h2>Admin Login</h2>
-                <p>Manage students, marks, feedback, and system data using Jazzmin admin panel.</p>
-                <a class="btn" href="/admin/">Go to Admin</a>
-            </div>
-
-            <!-- 2. Teacher Dashboard -->
-            <div class="card">
-                <h2>Teacher Dashboard</h2>
-                <p>View KPIs, weak subjects, charts, and search students to view subject-wise report.</p>
-                <a class="btn" href="/teacher/dashboard/">Open Dashboard</a>
-            </div>
-
-            <!-- 3. Student Feedback -->
-            <div class="card">
-                <h2>Student Feedback</h2>
-                <p>Students can submit difficulty feedback without login. Only this page is public.</p>
-                <a class="btn outline" href="/feedback/">Give Feedback</a>
-            </div>
-
-        </div>
-
-        <div class="footer">
-            © Learnalytics
-        </div>
-
     </div>
+
 </body>
 
 </html>

@@ -1,16 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Count, FloatField
 from django.db.models.functions import Coalesce
+from django.contrib import messages
 
 from students.models import Student, Mark
 
+# --- AUTHENTICATION VIEWS ---
+
+def teacher_login_view(request):
+    if request.method == 'POST':
+        u = request.POST.get('username')
+        p = request.POST.get('password')
+        user = authenticate(request, username=u, password=p)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('teacher_dashboard') # Redirects to the dashboard view below
+        else:
+            messages.error(request, "Invalid username or password.")
+            
+    return render(request, 'teacher/teacher_login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+# --- DASHBOARD VIEWS ---
 
 def home_view(request):
     return render(request, "home.html")
 
-
-@login_required(login_url="/admin/login/")
+# Updated to use your new teacher login URL
+@login_required(login_url="/authentication/login/teacher/")
 def dashboard(request):
     total_students = Student.objects.count()
     total_marks = Mark.objects.count()
