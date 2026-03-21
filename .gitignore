@@ -12,6 +12,8 @@ venv/
 
 # Environment variables
 .env
+cert.key
+cert.crt
 
 # OS junk
 .DS_Store
