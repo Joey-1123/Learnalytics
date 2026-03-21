@@ -21,11 +21,19 @@
                 </div>
             </div>
 
-            {% if form.errors %}
-            <div class="error-box">
-                Invalid username or password. Please try again.
-            </div>
-            {% endif %}
+            {% if messages %}
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+{% if form.errors %}
+    <div class="alert error">
+        Invalid username or password. Please try again.
+    </div>
+{% endif %}
 
             <form method="post" action="{% url 'admin:login' %}">
                 {% csrf_token %}
