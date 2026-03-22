@@ -1,4 +1,4 @@
-# Learnalytics – AI-Powered Student Performance Analytics
+8# Learnalytics – AI-Powered Student Performance Analytics
 
 Learnalytics is a Django-based academic analytics platform that analyzes student marks and generates insights using classical AI techniques (without Large Language Models).
 
@@ -244,7 +244,7 @@ Visualization:
 
 Database:
 
-* SQLite
+* Superbase(PostgresSql)
 
 ---
 
