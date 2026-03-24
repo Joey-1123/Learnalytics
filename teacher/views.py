@@ -4,7 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Min, Max, Count, FloatField
 from django.db.models.functions import Coalesce
 from django.contrib import messages
-
+from django.http import HttpResponse
+import io
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 from students.models import Student, Mark
 
 # --- AUTHENTICATION VIEWS ---
@@ -91,3 +95,51 @@ def dashboard(request):
             "subject_report": subject_report,
         },
     )
+
+def download_chart(request, chart_type):
+    # Set the figure and background
+    plt.figure(figsize=(8, 5))
+    plt.style.use('dark_background')
+    fig = plt.gcf()
+    fig.patch.set_facecolor('#0a0a0a') # Matches your card background
+    ax = plt.gca()
+    ax.set_facecolor('#0a0a0a')
+
+    # Brand Colors
+    LEARNALYTICS_CYAN = '#06b6d4'
+    LEARNALYTICS_ORANGE = '#f97316'
+    LEARNALYTICS_GREEN = '#22c55e'
+    LEARNALYTICS_BLUE = '#3b82f6'
+
+    if chart_type == 'bar':
+        subjects = ['DSA', 'Math', 'Science']
+        averages = [60, 25, 35]
+        
+        # Apply the solid Cyan to all bars
+        bars = plt.bar(subjects, averages, color=LEARNALYTICS_CYAN)
+        
+        plt.title('Subject-wise Average Marks', color='#fff', pad=20, fontweight='bold')
+        plt.tick_params(colors='#94a3b8') # Muted gray for axis numbers
+        
+    elif chart_type == 'pie':
+        labels = ['Math', 'DSA', 'Science']
+        sizes = [50, 25, 25]
+        # Use your vibrant brand palette
+        colors = [LEARNALYTICS_ORANGE, LEARNALYTICS_BLUE, LEARNALYTICS_GREEN]
+        
+        # 'wedgeprops' adds that clean dark line between slices
+        plt.pie(sizes, labels=labels, autopct='%1.1f%%', colors=colors, 
+                startangle=140, textprops={'color':"w", 'weight':'bold'},
+                wedgeprops={'linewidth': 3, 'edgecolor': '#0a0a0a'})
+        
+        plt.title('Marks Distribution (All Subjects)', color='#fff', pad=20, fontweight='bold')
+
+    # Save with high quality
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', facecolor=fig.get_facecolor(), dpi=150)
+    plt.close()
+    buf.seek(0)
+
+    response = HttpResponse(buf.read(), content_type='image/png')
+    response['Content-Disposition'] = f'attachment; filename="Learnalytics_{chart_type}.png"'
+    return response

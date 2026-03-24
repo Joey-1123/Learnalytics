@@ -33,6 +33,8 @@ urlpatterns = [
     path('feedback/', include('feedback.urls')),
     path('teacher/', include('teacher.urls')),
     path('visualization/', include('visualization.urls')),
+    path('students/', include('students.urls')),
+    
 
     # Logout
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),

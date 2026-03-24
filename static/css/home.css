@@ -198,3 +198,31 @@ p {
 .buttons {
     margin-top: 20px;
 }
+
+.feedback-section {
+    margin-top: 30px;
+    /* Space below the login links */
+    display: flex;
+    justify-content: center;
+}
+
+.btn-feedback {
+    display: inline-block;
+    padding: 13px 43px;
+    background-color: #06b6d4;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.btn-feedback:hover {
+    background-color: #22d3ee;
+    transform: translateY(-3px);
+    /* Subtle lift on hover */
+    box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4);
+}

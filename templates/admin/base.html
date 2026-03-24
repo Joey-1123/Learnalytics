@@ -5,103 +5,80 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }}{% endblock %}</title>
 
-    <title>
-        {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }}{% endblock %}
-    </title>
-
-    <!-- Keep Django admin base CSS for widgets/forms behaviour -->
     <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
-
-    <!-- Your custom admin UI shell -->
-    <link rel="stylesheet" href="{% static 'css/admin_shell.css' %}?v=999">
-
-    {% block extrastyle %}{% endblock %}
-    {% block extrahead %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/admin_shell.css' %}?v=1.1">
 </head>
 
 <body class="{% block bodyclass %}admin{% endblock %}">
-    <div class="la-admin">
+    <div class="layout">
 
-        <!-- Sidebar -->
-        <aside class="la-side">
-            <div class="la-brand">
-                <div class="la-logo">L</div>
-                <div>
-                    <div class="la-name">Learnalytics</div>
-                    <div class="la-sub">Admin Panel</div>
+        <aside class="sidebar">
+            <div class="sb-brand">
+                <div class="sb-logo">L</div>
+                <div class="sb-title-wrap">
+                    <div class="sb-name">Learnalytics</div>
+                    <div class="sb-sub">Admin Panel</div>
                 </div>
             </div>
 
-            <nav class="la-nav">
-                <a class="la-link" href="{% url 'admin:index' %}">Dashboard</a>
-                <a class="la-link" href="/">Home</a>
-                <a class="la-link" href="/teacher/dashboard/">Teacher Dashboard</a>
-
+            <nav class="sb-nav">
+                <a class="sb-link" href="{% url 'admin:index' %}">Dashboard</a>
+                <a class="sb-link" href="/teacher/dashboard/">Teacher Dashboard</a>
+                <a class="sb-link" href="/">Home</a>
             </nav>
 
-            <div class="la-user">
-                <div class="la-avatar">{{ request.user.username|default:"A"|slice:":1"|upper }}</div>
-                <div>
-                    <div class="la-username">{{ request.user.username|default:"Admin" }}</div>
-                    <div class="la-role">{% if request.user.is_superuser %}Superuser{% else %}Staff{% endif %}</div>
+            <div class="sb-footer">
+                <div class="userbox">
+                    <div class="avatar">{{ request.user.username|default:"A"|slice:":1"|upper }}</div>
+                    <div class="usertext">
+                        <div class="uname">{{ request.user.username|default:"Admin" }}</div>
+                        <div class="urole">{% if request.user.is_superuser %}Superuser{% else %}Staff{% endif %}</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="la-side-actions">
-                <a class="la-btn outline" href="{% url 'admin:password_change' %}">Change Password</a>
-
-                <form action="{% url 'admin:logout' %}" method="post">
-                    {% csrf_token %}
-                    <button class="la-btn danger" type="submit">Logout</button>
-                </form>
+                <div class="sb-actions">
+                    <a class="sb-btn outline" href="{% url 'admin:password_change' %}">Settings</a>
+                    <form class="logout-form" action="{% url 'admin:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="sb-btn danger" type="submit">Logout</button>
+                    </form>
+                </div>
             </div>
         </aside>
 
-        <!-- Main -->
         <main class="la-main">
 
-            <!-- Topbar -->
-            <header class="la-top">
-                <div class="la-top-left">
-                    <h1 class="la-title">{% block content_title %}{{ title }}{% endblock %}</h1>
-
-                    {% block breadcrumbs %}
-                    <div class="la-breadcrumbs">
-                        <a href="{% url 'admin:index' %}">Admin</a>
-                        {% if breadcrumbs %} / {{ breadcrumbs }}{% endif %}
-                    </div>
-                    {% endblock %}
+            <div class="la-top-left">
+                <h1 class="la-title">{% block content_title %}{{ title }}{% endblock %}</h1>
+                {% block breadcrumbs %}
+                <div class="la-breadcrumbs">
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                    {% if breadcrumbs %} / {{ breadcrumbs }}{% endif %}
                 </div>
-
-                <div class="la-top-right">
-                    {% block usertools %}
-
-                    {% endblock %}
-                </div>
-            </header>
-
-            {% if messages %}
-            <div class="la-messages">
-                {% for message in messages %}
-                <div class="la-msg {{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <div class="la-content">
-                {% block content %}
-                {{ content }}
                 {% endblock %}
             </div>
+            <div class="la-top-right">
+                {% block usertools %}{% endblock %}
+            </div>
 
 
-        </main>
+            {% if messages %}
+            <ul class="messagelist">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{ message|capfirst }}
+                    </li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
 
+
+            {% block content %}{{ content }}{% endblock %}
     </div>
-
-    {% block footer %}{% endblock %}
+    </main>
+    </div>
 </body>
 
 </html>

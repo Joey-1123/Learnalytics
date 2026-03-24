@@ -1,0 +1,154 @@
+/* ADMIN FORM (ADD/EDIT) THEME - REFINED */
+
+/* 1. Force Black Background and Card Alignment */
+.form-card {
+    max-width: 800px;
+    /* Slightly wider for better readability */
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    /* Extra padding for premium feel */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+/* 2. Django Fieldsets & Layout Reset */
+fieldset.module {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.form-row {
+    padding: 20px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    display: flex;
+    flex-direction: column;
+    /* Vertical stack for modern look */
+    gap: 10px;
+    width: 100%;
+}
+
+/* 3. Labels and Inputs */
+.form-row label {
+    display: block !important;
+    color: var(--cyan) !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    float: none !important;
+    /* CRITICAL: Kills Django's side-by-side float */
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* Target ALL possible input types including number and date */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+select,
+textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #111 !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    padding: 14px !important;
+    color: #fff !important;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--cyan) !important;
+    outline: none;
+    background: #161b22 !important;
+    /* Subtle glow on focus */
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+}
+
+/* 4. Help Text and Errors */
+.help,
+.helptext {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    margin-top: 8px !important;
+    line-height: 1.6;
+    display: block;
+}
+
+ul.errorlist {
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    color: #ef4444 !important;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* 5. Submit Row (The Action Bar) */
+.submit-row {
+    background: #0a0a0a !important;
+    /* Darker bar */
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px;
+    display: flex;
+    justify-content: flex-end;
+    /* Buttons to the right */
+    gap: 12px;
+    margin-top: 40px;
+    padding: 20px !important;
+}
+
+.submit-row input {
+    margin: 0 !important;
+    /* Remove Django margins */
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: none !important;
+}
+
+/* Primary Button (Save) */
+.submit-row input[name="_save"],
+.submit-row input.default {
+    background: var(--cyan) !important;
+    color: #000 !important;
+}
+
+.submit-row input:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* Delete Link Styling */
+.submit-row a.deletelink {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-right: auto;
+    /* Push delete to the far left */
+}
+
+.submit-row a.deletelink:hover {
+    background: #ef4444 !important;
+    color: #fff !important;
+}

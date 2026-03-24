@@ -3,7 +3,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import Student
 from .ai.predictor import PerformancePredictor
 from .ai.recommender import SubjectRecommender
+from .serializers import StudentSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
+@api_view(['GET'])
+def student_list_json(request):
+    students = Student.objects.all()
+    # 'many=True' is required because we are serializing a list of students
+    serializer = StudentSerializer(students, many=True)
+    return Response(serializer.data)
 
 def student_dashboard(request, student_id):
 
