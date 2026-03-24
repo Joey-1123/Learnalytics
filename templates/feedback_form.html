@@ -21,9 +21,9 @@
         </header>
 
         <div class="form-container">
-            {% if error %}
+            {% if form.non_field_errors %}
             <div class="error-banner">
-                <span class="error-icon">⚠️</span> {{ error }}
+                <span class="error-icon">⚠️</span> {{ form.non_field_errors|join:", " }}
             </div>
             {% endif %}
 
@@ -32,21 +32,36 @@
 
                 <div class="form-grid">
                     <div class="field-group">
-                        <label for="subject">Subject Name</label>
-                        <input type="text" id="subject" name="subject" placeholder="e.g. Data Structures" required>
+                        <label for="name">Your Name</label>
+                        {{ form.name }}
+                        {{ form.name.errors }}
                     </div>
 
                     <div class="field-group">
-                        <label for="difficulty">Difficulty (1-10)</label>
-                        <input type="number" id="difficulty" name="difficulty" min="1" max="10"
-                            placeholder="Select rating" required>
+                        <label for="roll_number">Roll Number</label>
+                        {{ form.roll_number }}
+                        {{ form.roll_number.errors }}
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-group">
+                        <label for="subject">Subject Name</label>
+                        {{ form.subject }}
+                        {{ form.subject.errors }}
+                    </div>
+
+                    <div class="field-group">
+                        <label for="difficulty">Difficulty (1-5)</label>
+                        {{ form.difficulty }}
+                        {{ form.difficulty.errors }}
                     </div>
                 </div>
 
                 <div class="field-group full-width">
                     <label for="description">Detailed Description</label>
-                    <textarea id="description" name="description"
-                        placeholder="Share your experience with this subject..." rows="5"></textarea>
+                    {{ form.description }}
+                    {{ form.description.errors }}
                 </div>
 
                 <div class="form-actions">

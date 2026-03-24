@@ -1,30 +1,19 @@
 from django.shortcuts import render, redirect
-from .models import Feedback
+from .forms import FeedbackForm
 
 
 def feedback_form(request):
-    error = None
-
     if request.method == "POST":
-        subject = (request.POST.get("subject") or "").strip()
-        difficulty_raw = (request.POST.get("difficulty") or "").strip()
-        description = (request.POST.get("description") or "").strip()
-
-        if not subject:
-            error = "Subject is required."
-        else:
-            try:
-                difficulty = int(difficulty_raw)
-                if difficulty < 1 or difficulty > 5:
-                    error = "Difficulty must be between 1 and 5."
-            except ValueError:
-                error = "Difficulty must be a number."
-
-        if not error:
-            Feedback.objects.create(subject=subject, difficulty=difficulty, description=description)
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.student = form.cleaned_data["student"]
+            feedback.save()
             return redirect("feedback_success")
+    else:
+        form = FeedbackForm()
 
-    return render(request, "feedback_form.html", {"error": error})
+    return render(request, "feedback_form.html", {"form": form})
 
 
 def feedback_success(request):
