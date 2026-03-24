@@ -1,525 +1,676 @@
-/* Learnalytics Admin Shell - wraps ALL admin pages */
+/* Learnalytics Admin Shell - ALL-IN-ONE DARK THEME */
 
+:root {
+    --bg-black: #000000;
+    --card-bg: #0a0a0a;
+    --border-color: #1e293b;
+    --cyan: #06b6d4;
+    --cyan-hover: #22d3ee;
+    --text-muted: #94a3b8;
+    --panel-dark: #020617;
+}
+
+/* 1. Reset & Global */
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 html,
 body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    background: #f6f7fb;
-    color: #111;
-}
-
-/* Layout */
-.la-admin {
     height: 100vh;
-    display: grid;
-    grid-template-columns: 280px 1fr;
+    margin: 0;
+    background: var(--bg-black) !important;
     overflow: hidden;
+    color: #fff;
 }
 
-/* Sidebar */
-.la-side {
-    background: #0f172a;
-    color: #fff;
-    padding: 18px;
+/* 2. The Layout Engine (Prevents Sidebar Overlap) */
+.layout {
+    display: flex !important;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 3. Sidebar Styling */
+.sidebar {
+    width: 253px;
+    min-width: 240px;
+    background: var(--panel-dark);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px;
+    height: 100vh;
+    left: 0;
+    top: 0;
 }
 
-.la-brand {
+.sb-brand {
     display: flex;
     gap: 12px;
-    align-items: stretch;
-    padding-bottom: 6px 4px 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
 }
 
-.la-logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: #111;
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-
-}
-
-.la-name {
-    font-size: 16px;
-    font-weight: 800;
-}
-
-.la-sub {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-top: 2px;
-}
-
-.la-nav {
-    margin-top: 14px;
-    display: grid;
-    gap: 8px;
-}
-
-.la-link {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.92);
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
-    font-weight: 700;
-    align-items: stretch;
-
-}
-
-.la-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.la-user {
-    margin-top: auto;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    gap: 10px;
-    align-items: stretch;
-}
-
-.la-avatar {
+.sb-logo {
     width: 40px;
     height: 40px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.10);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--cyan);
+    color: #000;
+    border-radius: 8px;
     display: grid;
     place-items: center;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.sb-name {
     font-weight: 800;
+    color: var(--cyan-hover);
+    font-size: 16px;
 }
 
-.la-username {
-    font-weight: 800;
+.sb-sub {
+    font-size: 11px;
+    color: var(--text-muted);
 }
 
-.la-role {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-top: 2px;
+.sb-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px;
+    font-size: medium;
 }
 
-.la-side-actions {
-    margin-top: 10px;
-    margin-bottom: 26px;
-    /* pulls buttons slightly up like you wanted */
-    display: grid;
+.sb-link {
+    text-decoration: none !important;
+    color: var(--text-muted) !important;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.sb-link:hover {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--cyan-hover) !important;
+}
+
+/* Sidebar User Box */
+.sb-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.userbox {
+    display: flex;
     gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.la-btn {
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--cyan);
+    color: #000;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+}
+
+.uname {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.urole {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.sb-actions {
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+}
+
+.sb-btn {
     width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.10);
-    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
     font-weight: 800;
+    font-size: 11px;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
-
+    border: none;
 }
 
-.la-btn:hover {
-    background: rgba(255, 255, 255, 0.14);
-}
-
-.la-btn.outline {
+.sb-btn.outline {
     background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px;
 }
 
-.la-btn.danger {
-    background: rgba(239, 68, 68, 0.20);
-    border-color: rgba(239, 68, 68, 0.30);
+.sb-btn.danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: 8px;
 }
 
-/* Main */
+/* 4. Main Content Area */
 .la-main {
+    flex: 1;
+    background: var(--bg-black);
+    height: 100vh;
     overflow-y: auto;
-    padding: 18px;
+    padding: 30px;
 }
 
-/* Topbar */
+/* 5. Topbar & Content Cards */
 .la-top {
-    background: #fff;
-    border: 1px solid #e8e8ee;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 14px 16px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
-    gap: 12px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .la-title {
     margin: 0;
     font-size: 22px;
+    font-weight: 800;
+}
+
+/* THIS KILLS THE WHITE BOXES */
+#content-main,
+.la-content,
+.module {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    color: #fff !important;
+}
+
+/* 6. Django Elements (Search/Table) */
+#changelist-search {
+    border-radius: 10px !important;
+    padding: 15px !important;
+    display: flex !important;
+    gap: 10px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 25px !important;
+    box-shadow: none !important;
+}
+
+#changelist-search input[type="text"] {
+    background: #000 !important;
+    border: 1px solid var(--border-color) !important;
+    color: #fff !important;
+    border-radius: 6px;
+    padding: 8px;
+    flex: 1;
+}
+
+/* Hide Django Defaults */
+/* 1. Remove that horizontal line under the brand/topbar */
+#header,
+.module h2,
+.inline-group h2,
+fieldset h2 {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Hide the default Django 'breadcrum' bar that often creates lines */
+#content>h1,
+.breadcrumbs {
+    border: none !important;
+    display: none !important;
+}
+
+/* 3. Clean up the sidebar brand area */
+.sb-brand {
+    border-bottom: 1px solid var(--border-color);
+    /* Keeps it consistent with your theme */
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* 4. Fix the white table header and search bar from your screenshot */
+#changelist-search,
+#result_list thead th {
+    background: #111827 !important;
+    /* Dark Blue/Black */
+    border: 1px solid var(--border-color) !important;
+}
+
+#result_list tbody tr {
+    background-color: transparent !important;
+}
+
+#content-main,
+.la-content,
+#changelist {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-top: 0 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 4. ALIGN THE ADD USER BUTTON */
+/* Moves the button to the top right of the table card */
+.object-tools {
+    margin: 0 0 20px 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    float: none !important;
+}
+
+/* ADD USER BUTTON POSITIONING & STYLING */
+
+/* 1. The Container */
+.object-tools {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin: 0 0 20px 0 !important;
+    /* Spacing above the search bar */
+    padding: 0 !important;
+    float: none !important;
+    /* Kill Django default float */
+    list-style: none !important;
+}
+
+/* 2. The Button Itself */
+.object-tools a.addlink {
+    background: var(--cyan) !important;
+    color: #000 !important;
+    height: 38px !important;
+    padding: 0 18px !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+/* 3. Hover Effect */
+.object-tools a.addlink:hover {
+    background: var(--cyan-hover) !important;
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+    transform: translateY(-1px);
+}
+
+/* 4. Fix the Icon (The '+' sign) */
+.object-tools a.addlink::before {
+    content: '+' !important;
+    margin-right: 8px;
+    font-size: 16px;
     font-weight: 900;
 }
 
-.la-breadcrumbs {
-    margin-top: 6px;
-    font-size: 12px;
-    color: #6b7280;
-}
+/* UNIFIED SEARCH BUTTON & INPUT FIX */
 
-.la-breadcrumbs a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 800;
-}
-
-.la-breadcrumbs a:hover {
-    text-decoration: underline;
-}
-
-.la-top-right {
-    display: flex;
-    gap: 10px;
-}
-
-.la-toplink {
-    font-size: 13px;
-    color: #111;
-    text-decoration: none;
-    font-weight: 800;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    background: #fff;
-}
-
-.la-toplink:hover {
-    background: #f3f4f6;
-}
-
-/* Content wrapper */
-.la-content {
-    margin-top: 14px;
-}
-
-/* Messages */
-.la-messages {
-    margin-top: 12px;
-    display: grid;
-    gap: 10px;
-}
-
-.la-msg {
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    background: #f9fafb;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.la-msg.error {
-    border-color: #fecaca;
-    background: #fff1f2;
-}
-
-.la-msg.success {
-    border-color: #bbf7d0;
-    background: #f0fdf4;
-}
-
-/* Footer */
-.la-foot {
-    margin-top: 12px;
-    color: #6b7280;
-    font-size: 12px;
-    text-align: center;
-}
-
-/* ====== Style Django admin generated elements inside content ====== */
-
-/* Remove Django default header spacing inside content */
-#header,
-#nav-sidebar {
-    display: none !important;
-}
-
-/* Make links look like your theme */
-.la-content a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 800;
-}
-
-.la-content a:hover {
-    text-decoration: none;
-}
-
-/* Tables */
-.la-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.la-content th,
-.la-content td {
-    border: 1px solid #eee;
-    padding: 10px;
-    text-align: left;
-}
-
-.la-content th {
-    background: #fafafa;
-}
-
-/* Django action buttons */
-.la-content input[type="submit"],
-.la-content button,
-.la-content .button,
-.la-content a.button {
-    border-radius: 10px !important;
-    border: 1px solid #111 !important;
-    background: #111 !important;
-    color: #fff !important;
-    font-weight: 900 !important;
-    padding: 8px 12px !important;
-}
-
-.la-content .button.default,
-.la-content input.default {
-    background: #111 !important;
-}
-
-.la-content .paginator {
-    margin-top: 12px;
-}
-
-/* Filters right column (changelist) */
-.la-content #changelist-filter {
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 12px;
-    background: #fcfcfd;
-}
-
-/* Make changelist layout breathe */
-.la-content #changelist {
-    margin-top: 6px;
-}
-
-/* Responsive */
-@media (max-width: 1000px) {
-    .la-admin {
-        grid-template-columns: 1fr;
-    }
-
-    .la-side {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-}
-
-/* Make Django breadcrumbs look clean */
-.breadcrumbs {
-    margin-top: 8px !important;
-    padding: 8px 10px !important;
-    border-radius: 10px !important;
-    background: #f3f4f6 !important;
-    border: 1px solid #e5e7eb !important;
-    color: #111 !important;
-    font-weight: 700 !important;
-}
-
-.breadcrumbs a {
-    color: #2563eb !important;
-    text-decoration: none !important;
-}
-
-.breadcrumbs a:hover {
-    text-decoration: underline !important;
-}
-
-/* Object tools (Add button) alignment */
-.object-tools {
-    margin: 0 !important;
-    padding: 0 !important;
-    float: none !important;
-    display: flex !important;
-    justify-content: flex-end !important;
-    gap: 10px !important;
-}
-
-.object-tools a {
-    border-radius: 10px !important;
-    border: 1px solid #111 !important;
-    background: #111 !important;
-    color: #fff !important;
-    font-weight: 900 !important;
-    padding: 10px 12px !important;
-    text-decoration: none !important;
-}
-
-/* Changelist search bar */
-#changelist-search {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    padding: 12px !important;
-    border-radius: 12px !important;
-    border: 1px solid #eee !important;
-    background: #fafafa !important;
-    margin-bottom: 12px !important;
-}
-
-#changelist-search input[type="text"] {
-    width: 320px !important;
-    padding: 10px 12px !important;
-    border-radius: 10px !important;
-    border: 1px solid #ddd !important;
-}
-
+/* 1. The Search Button */
 #changelist-search input[type="submit"] {
-    border-radius: 10px !important;
-    border: 1px solid #111 !important;
-    background: #111 !important;
-    color: #fff !important;
-    font-weight: 900 !important;
-    padding: 10px 12px !important;
-    cursor: pointer !important;
-}
-
-/* Actions row */
-.actions {
-    margin: 0 0 10px !important;
-    padding: 10px 12px !important;
-    border-radius: 12px !important;
-    border: 1px solid #eee !important;
-    background: #fff !important;
-}
-
-/* Make changelist table full width */
-#changelist-form {
-    overflow: visible !important;
-}
-
-#result_list {
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    border: 1px solid #eee !important;
-}
-
-/* Filter box */
-#changelist-filter {
-    border-radius: 12px !important;
-    border: 1px solid #eee !important;
-    background: #fcfcfd !important;
-}
-
-#changelist-filter h2 {
-    border-radius: 10px !important;
-    background: #0f172a !important;
-    color: #fff !important;
-    padding: 10px 12px !important;
-    margin: 0 0 10px !important;
-}
-
-
-/* Remove empty admin blocks that create blank bars */
-#content-related,
-#recent-actions,
-.module caption {
-    display: none !important;
-}
-
-/* Reduce extra top spacing inside admin content */
-#content {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-
-/* ===== Fix Django Admin changelist search bar ===== */
-
-/* Whole search strip */
-#changelist-search {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-
-    padding: 12px !important;
-    margin: 0 0 12px !important;
-
-    border: 1px solid #e5e7eb !important;
-    border-radius: 12px !important;
-    background: #fafafa !important;
-
-    /* remove Django float/width weirdness */
-    float: none !important;
-}
-
-/* Remove default "Search:" label spacing if it looks odd */
-#changelist-search label {
-    margin: 0 !important;
+    background: var(--cyan) !important;
+    color: #000 !important;
+    height: 38px !important;
+    /* Matches Add User button height */
+    padding: 0 20px !important;
+    border-radius: 8px !important;
     font-weight: 800 !important;
-    color: #111 !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none !important;
+    transition: all 0.3s ease;
+    margin-left: 8px !important;
+    /* Space between input and button */
+    display: inline-flex !important;
+    align-items: center !important;
 }
 
-/* Search input */
-#changelist-search input[type="text"] {
-    flex: 1 !important;
-    min-width: 260px !important;
+#changelist-search input[type="submit"]:hover {
+    background: var(--cyan-hover) !important;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    transform: translateY(-1px);
+}
 
-    padding: 10px 12px !important;
-    border-radius: 10px !important;
-    border: 1px solid #d1d5db !important;
-    outline: none !important;
-    background: #fff !important;
+/* 2. The Search Input Field */
+#changelist-search input[type="text"] {
+    background: #000 !important;
+    border: 1px solid var(--border-color) !important;
+    color: #fff !important;
+    height: 38px !important;
+    /* Matches button height */
+    border-radius: 8px !important;
+    padding: 0 15px !important;
+    font-size: 13px !important;
+    width: 300px !important;
+    /* Professional width */
 }
 
 #changelist-search input[type="text"]:focus {
-    border-color: #111 !important;
+    border-color: var(--cyan) !important;
+    outline: none !important;
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.2);
 }
 
-/* Search button */
-#changelist-search input[type="submit"],
-#changelist-search button {
-    padding: 10px 14px !important;
-    border-radius: 10px !important;
+/* 3. Cleanup the Search Container */
+#changelist-search {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+}
 
-    border: 1px solid #111 !important;
-    background: #111 !important;
-    color: #fff !important;
+/* 4. Fix "6 users" / "Total" text next to search */
+#changelist-search .quiet {
+    color: var(--text-muted) !important;
+    font-size: 12px;
+    margin-left: 15px;
+}
 
-    font-weight: 900 !important;
+/* TABLE HEADERS & DATA ROWS FIX */
+
+/* 1. The Table Container */
+#result_list {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    background: transparent !important;
+}
+
+/* 2. Header Row (Username, Email, etc.) */
+#result_list thead th {
+    background: #0f172a !important;
+    /* Deep Navy/Black */
+    color: var(--cyan) !important;
+    padding: 15px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    border-top: none !important;
+    text-align: left !important;
+}
+
+/* 3. Data Rows */
+#result_list tbody tr {
+    background-color: var(--card-bg) !important;
+    /* Pure Black Card */
+    transition: background 0.2s ease;
+}
+
+#result_list tbody tr:hover {
+    background-color: rgba(6, 182, 212, 0.05) !important;
+    /* Subtle Cyan Glow on Hover */
+}
+
+#result_list tbody td {
+    padding: 15px !important;
+    color: #cbd5e1 !important;
+    /* Soft White/Gray text */
+    border-bottom: 1px solid var(--border-color) !important;
+    font-size: 13px !important;
+}
+
+/* 4. Username Link Styling */
+#result_list tbody td.field-username a {
+    color: var(--cyan-hover) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+#result_list tbody td.field-username a:hover {
+    text-decoration: underline !important;
+}
+
+/* 5. Staff Status Icon Fix */
+/* This makes the green checkmark look better on dark backgrounds */
+#result_list img {
+    filter: brightness(1.2) contrast(1.2);
+}
+
+/* 6. Footer (Pagination/Total Count) */
+.paginator {
+    background: transparent !important;
+    color: var(--text-muted) !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 15px !important;
+    font-weight: 600 !important;
+}
+
+/* 1. FIX THE DATA ROWS (JOEY, EMAIL, ETC) */
+#result_list tbody tr {
+    background-color: var(--card-bg) !important;
+    /* Pure Black Card */
+    transition: background 0.2s ease;
+}
+
+#result_list tbody tr:hover {
+    background-color: rgba(6, 182, 212, 0.05) !important;
+    /* Subtle Cyan Glow on Hover */
+}
+
+/* 2. FIX THE TEXT COLOR FOR ALL CELLS */
+#result_list tbody td {
+    padding: 15px !important;
+    color: #e2e8f0 !important;
+    /* Crisp Off-White */
+    border-bottom: 1px solid var(--border-color) !important;
+    font-size: 13px !important;
+    vertical-align: middle !important;
+}
+
+/* 3. FIX THE USERNAME LINK (JOEY) */
+/* This changes the blue 'Joey' link to a bright Cyan */
+#result_list tbody th a,
+#result_list tbody td a {
+    color: var(--cyan) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: color 0.2s;
+}
+
+#result_list tbody th a:hover,
+#result_list tbody td a:hover {
+    color: var(--cyan-hover) !important;
+    text-decoration: underline !important;
+}
+
+/* 4. FIX THE STAFF STATUS ICON */
+/* This makes the green checkmark/red X pop on the black background */
+#result_list td img {
+    filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 5px rgba(34, 197, 94, 0.2));
+    width: 14px;
+    height: 14px;
+}
+
+/* 5. FIX THE EMPTY DASHES (-) */
+/* If a field is empty, it usually shows a '-', let's dim it */
+#result_list td:empty::before,
+#result_list td:contains("-") {
+    color: var(--text-muted) !important;
+    opacity: 0.5;
+}
+
+/* SUBMIT ROW / SAVE BUTTONS FIX */
+
+/* 1. The Container Bar */
+.submit-row {
+    background: transparent !important;
+    /* Kill the gray bar */
+    border: none !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    /* Align buttons to the right */
+    gap: 12px !important;
+    padding: 20px 0 0 0 !important;
+    margin-top: 20px !important;
+    border-top: 1px solid var(--border-color) !important;
+}
+
+/* 2. Base Button Style */
+.submit-row input[type="submit"],
+.submit-row input[type="button"],
+.submit-row a.closelink {
+    height: 40px !important;
+    padding: 0 20px !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
     cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }
 
-#changelist-search input[type="submit"]:hover,
-#changelist-search button:hover {
-    opacity: 0.92 !important;
+/* 3. Primary Button (Save) */
+/* This makes the main "Save" button stand out with full Cyan */
+.submit-row input[name="_save"],
+.submit-row input.default {
+    background: var(--cyan) !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2) !important;
 }
 
-/* On smaller screens stack input + button */
-@media (max-width: 700px) {
+.submit-row input[name="_save"]:hover {
+    background: var(--cyan-hover) !important;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5) !important;
+    transform: translateY(-1px);
+}
+
+/* 4. Secondary Buttons (Save and add another / continue) */
+/* These get a subtle outline/muted look to keep focus on "Save" */
+.submit-row input[name="_addanother"],
+.submit-row input[name="_continue"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-muted) !important;
+}
+
+.submit-row input[name="_addanother"]:hover,
+.submit-row input[name="_continue"]:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+/* 5. Delete Button (If present) */
+.submit-row a.deletelink {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    border: 1px solid rgba(239, 68, 68, 0.2) !important;
+    margin-right: auto !important;
+    /* Pushes Delete to the far left */
+}
+
+.submit-row a.deletelink:hover {
+    background: #ef4444 !important;
+    color: #fff !important;
+}
+
+/* ====== RESPONSIVE MOBILE FIXES ====== */
+
+@media (max-width: 1024px) {
+
+    /* 1. Change layout from side-by-side to stacked */
+    .la-admin,
+    .layout {
+        flex-direction: column !important;
+        overflow-y: auto !important;
+    }
+
+    /* 2. Make Sidebar a top bar instead */
+    .la-side,
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        min-width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px !important;
+    }
+
+    .sb-brand {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* 3. Horizontal Nav for Mobile Sidebar */
+    .sb-nav {
+        flex-direction: row !important;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 5px;
+    }
+
+    .sb-link {
+        white-space: nowrap;
+        padding: 8px 15px !important;
+    }
+
+    /* Hide Footer Userbox on very small screens to save space */
+    .sb-footer {
+        display: none !important;
+    }
+
+    /* 4. Adjust Main Content */
+    .la-main {
+        padding: 15px !important;
+        width: 100% !important;
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* 5. Handle the Table (The hardest part) */
+    /* This makes the table scrollable horizontally so it doesn't break the box */
+    .la-content,
+    #content-main,
+    #changelist {
+        padding: 10px !important;
+        overflow-x: auto !important;
+    }
+
+    #result_list {
+        display: block;
+        min-width: 600px;
+        /* Forces scroll instead of squishing */
+    }
+
+    /* 6. Fix Search Bar and Buttons */
     #changelist-search {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -527,165 +678,484 @@ body {
 
     #changelist-search input[type="text"] {
         width: 100% !important;
-        min-width: 0 !important;
+        margin-bottom: 10px;
+    }
+
+    .object-tools {
+        position: static !important;
+        /* Move Add User button back into flow */
+        justify-content: flex-start !important;
+        margin-bottom: 20px !important;
     }
 }
 
-#changelist-search .searchbar,
-#changelist-search div {
-    display: flex !important;
-    gap: 10px !important;
-    align-items: center !important;
-    flex: 1 !important;
-}
+/* ====== INLINE FORMSET FIX (MARKS SECTION) ====== */
 
-/* Remove unused toolbars that sometimes render as blank bars */
-#toolbar,
-#changelist-form>.module,
-#changelist-form .submit-row {
+/* 1. The Container Box */
+.inline-group {
     background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* ===== Fix Save buttons row (change form pages) ===== */
-
-.submit-row {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-
-    padding: 14px !important;
-    margin-top: 18px !important;
-
-    border: 1px solid #e8e8ee !important;
+    border: 1px solid var(--border-color) !important;
     border-radius: 12px !important;
-    background: #fff !important;
+    overflow: hidden;
+    margin-top: 25px !important;
 }
 
-/* left group of save buttons */
-.submit-row>*:not(.deletelink-box) {
-    display: inline-flex !important;
-    gap: 10px !important;
-    align-items: center !important;
+/* 2. Section Header (The "MARKS" blue bar) */
+.inline-group h2 {
+    background: #0f172a !important;
+    /* Deep Navy */
+    color: var(--cyan) !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    padding: 12px 15px !important;
+    border-bottom: 1px solid var(--border-color) !important;
 }
 
-/* make all submit buttons same size */
-.submit-row input[type="submit"],
-.submit-row button,
-.submit-row a.button {
-    height: 42px !important;
-    line-height: 42px !important;
-    padding: 0 14px !important;
-    border-radius: 10px !important;
-    font-weight: 900 !important;
-    cursor: pointer !important;
-    white-space: nowrap !important;
+/* 3. The Table Inside */
+.inline-group table {
+    background: transparent !important;
+    width: 100% !important;
 }
 
-/* Primary: Save */
-.submit-row input[name="_save"] {
-    font-weight: 700 !important;
-    background: #fff !important;
-    border: 1px solid #111 !important;
-    color: #111 !important;
+/* 4. Table Headers (Subject, Score) */
+.inline-group thead th {
+    background: #0f172a !important;
+    /* Dark Navy/Black background */
+    color: var(--cyan) !important;
+    /* Cyan text */
+    padding: 12px 15px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    border: none !important;
+    /* Removes the default white border */
+    border-bottom: 2px solid var(--border-color) !important;
 }
 
-/* Secondary: other save buttons */
-.submit-row input[name="_addanother"],
-.submit-row input[name="_continue"] {
-    font-weight: 700 !important;
-    background: #fff !important;
-    border: 1px solid #111 !important;
-    color: #111 !important;
+/* 5. Input Rows */
+.inline-group tbody tr {
+    background: transparent !important;
 }
 
-/* Hover */
-.submit-row input[name="_save"]:hover,
-.submit-row input[name="_addanother"]:hover,
-.submit-row input[name="_continue"]:hover {
-    background: #f3f4f6 !important;
+.inline-group tbody td {
+    padding: 12px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: transparent !important;
 }
 
-/* Keep delete at far right */
-.submit-row .deletelink-box {
-    margin-left: auto !important;
-}
-
-/* Delete button style (matches your red) */
-.submit-row a.deletelink {
-    height: 42px !important;
-    line-height: 42px !important;
-    padding: 0 14px !important;
-    border-radius: 10px !important;
-
-    background: #dc2626 !important;
-    border: 1px solid #dc2626 !important;
+/* 6. Fixing White Inputs (Subject/Score boxes) */
+.inline-group input[type="text"],
+.inline-group input[type="number"],
+.inline-group select {
+    background: #000 !important;
+    border: 1px solid var(--border-color) !important;
     color: #fff !important;
-    font-weight: 700 !important;
-    text-decoration: none !important;
-
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    border-radius: 6px !important;
+    padding: 8px !important;
+    width: 100% !important;
+    /* Makes them fill the column */
 }
 
-/* ===== Move ADD USER button to the top-right header area ===== */
-
-/* Make the main content card the positioning parent */
-#content-main {
-    position: relative !important;
-}
-
-/* Move the object-tools button */
-#content-main .object-tools {
-    display: none;
-}
-
-/* Remove list styling */
-#content-main .object-tools li {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Keep the button style consistent */
-#content-main .object-tools a {
-    display: inline-block !important;
-    border-radius: 10px !important;
-    border: 1px solid #111 !important;
-    background: #111 !important;
-    color: #fff !important;
-    font-weight: 900 !important;
-    padding: 10px 14px !important;
-    text-decoration: none !important;
-}
-
-/* ===== Sidebar Links ===== */
-
-.la-link,
-.la-link:link,
-.la-link:visited,
-.la-link:hover,
-.la-link:active {
-    color: #ffffff !important;
-    text-decoration: none !important;
-}
-
-/* Optional: better hover effect */
-.la-link:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-}
-
-.messagelist {
+/* 7. Hide the "Delete" checkbox text and style it */
+.inline-group .delete label {
     display: none !important;
 }
 
-#content-main {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+/* 8. Add "Add another Mark" link styling */
+.add-row a {
+    color: var(--cyan) !important;
+    font-weight: 700;
+    font-size: 12px;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.add-row a:hover {
+    color: var(--cyan-hover) !important;
+}
+
+/* Fix main form labels and inputs */
+.form-row label {
+    color: var(--cyan) !important;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+    background: #000 !important;
+    border: 1px solid var(--border-color) !important;
+    color: #fff !important;
+}
+
+.inline-group thead th a {
+    color: var(--cyan) !important;
+}
+
+/* 3. Remove the extra white background from the tabular container */
+.inline-group fieldset.module table {
+    background: transparent !important;
+    border-collapse: collapse !important;
+}
+
+/* 4. Tweak the subject/score text color so it stands out */
+.inline-group .column-subject,
+.inline-group .column-score {
+    color: var(--text-muted) !important;
+}
+
+/* 1. FIX THE DELETE BUTTON (RED BOX) */
+/* This transforms that messy red box into a professional danger button */
+.submit-row a.deletelink {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    border: 1px solid rgba(239, 68, 68, 0.2) !important;
+    height: 40px !important;
+    padding: 0 20px !important;
+    border-radius: 8px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    margin-right: auto !important;
+    /* Pushes delete to the far left */
+}
+
+.submit-row a.deletelink:hover {
+    background: #ef4444 !important;
+    color: #fff !important;
+}
+
+/* 2. FIX THE HISTORY BUTTON (TOP RIGHT) */
+.historylink {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-muted) !important;
+    border-radius: 8px !important;
+    padding: 8px 15px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    font-size: 11px;
+    transition: 0.3s;
+}
+
+.historylink:hover {
+    background: var(--cyan) !important;
+    color: #000 !important;
+    border-color: var(--cyan) !important;
+}
+
+/* 3. FIX THE INLINE OBJECT NAMES (OMKAR - SCIENCE) */
+/* This dims the repetitive "omkar - Science" text on the left of the rows */
+.inline-group .original {
+    color: var(--text-muted) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    padding-right: 15px !important;
+}
+
+/* 4. FIX THE DELETE CHECKBOX (RIGHT SIDE) */
+.inline-group .delete input[type="checkbox"] {
+    accent-color: #ef4444;
+    /* Makes the checkbox red */
+    width: 16px;
+    height: 16px;
+}
+
+/* 5. FIX THE MAIN HEADER (CHANGE STUDENT) */
+/* Moves it closer to the glass box and styles it cyan */
+.la-main h1,
+.la-title {
+    color: #fff !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+    /* Re-enable it if we previously hid it */
+}
+
+/* 1. FIX THE TABLE BORDERS & STAIRCASE LOOK */
+#result_list {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+#result_list tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: transparent !important;
+}
+
+/* Removes the white line under only the first column */
+#result_list td,
+#result_list th {
+    border: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 15px !important;
+    background: transparent !important;
+}
+
+/* 2. STYLE THE STUDENT NAMES (LINKS) */
+#result_list th.field-name a {
+    color: var(--cyan) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: 0.2s;
+}
+
+#result_list th.field-name a:hover {
+    color: var(--cyan-hover) !important;
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+/* 3. FIX THE "4 STUDENTS" TEXT (PAGINATOR) */
+.paginator {
+    color: var(--text-muted) !important;
+    background: transparent !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 15px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+/* 4. CLEAN UP THE SEARCH BAR SPACING */
+#changelist-search {
+    padding: 20px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    margin-bottom: 0 !important;
+}
+
+/* 5. FIX THE SORTING ICON GAP (RIGHT SIDE OF NAME) */
+.sortable .sortoptions {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+#action-toggle,
+.action-checkbox input {
+    accent-color: var(--cyan);
+    filter: invert(1) hue-rotate(180deg);
+    /* If accent-color doesn't work on older browsers */
+}
+
+/* ====== 7. DJANGO MESSAGES (SUCCESS/ERROR ALERTS) ====== */
+
+/* 1. The Container */
+ul.messagelist {
+    padding: 0 !important;
+    margin: 0 0 25px 0 !important;
+    list-style: none !important;
+}
+
+/* 2. The Message Box */
+ul.messagelist li {
+    background: rgba(6, 182, 212, 0.1) !important;
+    /* Subtle Cyan Tint */
+    border: 1px solid var(--cyan) !important;
+    color: var(--cyan-hover) !important;
+    padding: 14px 20px !important;
+    border-radius: 10px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(6, 182, 212, 0.1);
+    animation: slideIn 0.4s ease-out;
+}
+
+/* 3. Success Icon (The checkmark) */
+ul.messagelist li.success::before {
+    content: '✓';
+    margin-right: 12px;
+    font-size: 16px;
+    font-weight: 900;
+    background: var(--cyan);
+    color: #000;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+}
+
+/* 4. Error Styling (In case a save fails) */
+ul.messagelist li.error {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border-color: #ef4444 !important;
+    color: #f87171 !important;
+}
+
+ul.messagelist li.error::before {
+    content: '!';
+    background: #ef4444;
+}
+
+/* 5. Entrance Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== 8. HISTORY TABLE FIXES ====== */
+
+/* 1. Fix the white header bar */
+#change-history table thead th {
+    background: #0f172a !important;
+    /* Deep Navy to match your theme */
+    color: var(--cyan) !important;
+    padding: 15px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    border-top: none !important;
+}
+
+/* 2. Style the history data rows */
+#change-history table tbody tr {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+#change-history table tbody td,
+#change-history table tbody th {
+    padding: 15px !important;
+    color: #cbd5e1 !important;
+    /* Soft white text */
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    font-size: 13px !important;
+}
+
+/* 3. Fix the "1 entry" footer text */
+#change-history p {
+    color: var(--text-muted) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    margin-top: 20px !important;
+    padding-left: 5px !important;
+}
+
+/* 4. Ensure the main container doesn't have white gaps */
+#change-history {
+    background: transparent !important;
+}
+
+.module table {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* ====== 10. ERROR FIELD FIXES (NO MORE WHITE BOXES) ====== */
+
+/* 1. Remove the white background from the error container */
+.errornote,
+.errorlist {
+    background: rgba(239, 68, 68, 0.1) !important;
+    /* Subtle red tint */
+    border: 1px solid #ef4444 !important;
+    color: #f87171 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+    list-style: none !important;
+}
+
+/* 2. Fix the specific white bars above inputs */
+.form-row.errors {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* 3. Style the "This field is required" text */
+.errorlist li {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* 4. Highlight the input box when it has an error */
+.errors input,
+.errors select,
+.errors textarea {
+    border: 1px solid #ef4444 !important;
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* 5. Hide the default Django 'error' background for the whole row */
+td.errors,
+div.errors {
+    background: transparent !important;
+}
+
+/* ====== 11. DROPDOWN & RELATED WIDGET FIXES ====== */
+
+/* 1. Fix the white dropdown (Select box) */
+select {
+    background: #000 !important;
+    border: 1px solid var(--border-color) !important;
+    color: #fff !important;
+    border-radius: 6px !important;
+    padding: 8px !important;
+    appearance: none;
+    /* Removes default arrow in some browsers */
+    cursor: pointer;
+}
+
+/* 2. Fix the Related Icons (Add/Change/View buttons next to Student) */
+.related-widget-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px;
+}
+
+/* Target the icons directly */
+.related-widget-wrapper a img {
+    filter: invert(58%) sepia(90%) saturate(1500%) hue-rotate(150deg) brightness(100%) contrast(100%) !important;
+    /* This filter turns the default icons into Learnalytics Cyan */
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.related-widget-wrapper a:hover img {
+    transform: scale(1.2);
+    filter: brightness(1.2) drop-shadow(0 0 5px var(--cyan));
+}
+
+/* 3. Fix the horizontal line going through the "Student" label */
+.form-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 20px 0 !important;
+}
+
+fieldset.module {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Fix for that specific line next to "Student:" */
+.form-row label {
+    background: transparent !important;
+    padding-right: 15px !important;
+    width: 160px !important;
+    /* Proper alignment */
+}
+
+/* 4. Fix the Save buttons at the bottom (Padding issue) */
+.submit-row {
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-color) !important;
+    padding: 20px !important;
+    border-radius: 0 0 16px 16px !important;
 }

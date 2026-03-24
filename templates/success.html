@@ -1,20 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Thank you | Learnalytics</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <meta charset="UTF-8">
+    <title>Success | Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
 </head>
 
 <body>
-    <div class="container">
-        <div class="card" style="margin-top:40px; text-align:center;">
-            <h2>Thanks!</h2>
-            <p>Your feedback was submitted successfully.</p>
-            <a class="btn" href="/">Go Home</a>
+
+    <div class="success-wrapper">
+        <div class="success-card">
+            <div class="form-logo">L</div>
+
+            <div class="success-icon">✓</div>
+
+            <h1>Thanks!</h1>
+            <p class="success-text">Your feedback was submitted successfully.</p>
+            <p class="muted">We appreciate your contribution to improving the curriculum.</p>
+
+            <div class="success-actions">
+                <a href="/" class="btn-submit">Return Home</a>
+            </div>
         </div>
+
+        <footer class="form-footer">
+            © 2026 Learnalytics Performance Tracker
+        </footer>
     </div>
+
 </body>
 
 </html>

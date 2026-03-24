@@ -8,4 +8,5 @@ urlpatterns = [
     # Login and Logout paths (assuming they are in this app)
     path("login/", views.teacher_login_view, name="teacher_login"),
     path("logout/", views.logout_view, name="logout"),
-]
+    path('teacher/download-chart/<str:chart_type>/', views.download_chart, name='download_chart'),
+    ]

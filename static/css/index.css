@@ -249,7 +249,7 @@ body {
 }
 
 .usertext .urole {
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text-muted);
     text-transform: uppercase;
     padding-top: 8px;
