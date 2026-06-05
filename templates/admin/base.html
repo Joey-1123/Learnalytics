@@ -1,6 +1,6 @@
 {% load i18n static %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:'en-us' }}">
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <title>{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }}{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_shell.css' %}?v=1.1">
 </head>
 

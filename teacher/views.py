@@ -13,6 +13,11 @@ from students.models import Student, Mark
 
 # --- AUTHENTICATION VIEWS ---
 
+def admin_login_view(request):
+    logout(request)
+    return redirect('/admin/login/')
+
+
 def teacher_login_view(request):
     if request.method == 'POST':
         u = request.POST.get('username')

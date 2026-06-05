@@ -1,10 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <title>Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
@@ -37,7 +38,7 @@
                 <div class="login-main-label">Login here →</div>
 
                 <div class="login-choices">
-                    <a href="/admin/" class="choice admin">Admin</a>
+                    <a href="{% url 'admin_login' %}" class="choice admin">Admin</a>
                     <a href="{% url 'teacher_login' %}" class="choice teacher">Teacher</a>
                 </div>
             </div>
