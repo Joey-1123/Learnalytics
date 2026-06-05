@@ -15,6 +15,9 @@ venv/
 cert.key
 cert.crt
 
+# Session memory for LLM context
+memory.md
+
 # OS junk
 .DS_Store
 Thumbs.db
