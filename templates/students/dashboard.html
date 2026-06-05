@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <title>Student Dashboard | Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="brand">
+                <div class="logo">L</div>
+                <div>
+                    <h1>Student Dashboard</h1>
+                    <p>{{ student.name }} (Roll: {{ student.roll_number }})</p>
+                </div>
+            </div>
+            <div class="actions">
+                <a class="btn outline" href="/">Home</a>
+                <form action="{% url 'student_logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid3">
+            <div class="kpi" style="border-left: 4px solid {% if risk == 'high' %}var(--orange){% elif risk == 'medium' %}var(--yellow){% else %}var(--green){% endif %};">
+                <div class="kpi-title">Risk Level</div>
+                <div class="kpi-value">{{ risk|upper }}</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-title">Predicted Next Score</div>
+                <div class="kpi-value">{{ predicted_score }}</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-title">Weak Subjects</div>
+                <div class="kpi-value">{{ weak_subjects|length }}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Your Marks</h2>
+            {% if marks %}
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Score</th>
+                </tr>
+                {% for m in marks %}
+                <tr>
+                    <td>{{ m.subject }}</td>
+                    <td>{{ m.score }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No marks recorded yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h2>Subject Breakdown</h2>
+            {% if by_subject %}
+            {% for subject, scores in by_subject.items %}
+            <div style="margin-bottom:1rem;">
+                <strong>{{ subject }}</strong> — Avg: {{ scores|length }}
+                <div style="background:#1e293b; border-radius:8px; height:10px; margin-top:4px; overflow:hidden;">
+                    <div style="background:var(--cyan); height:100%; width:{{ scores|first }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        {% if recommendations %}
+        <div class="card">
+            <h2>Study Recommendations</h2>
+            <ul>
+                {% for r in recommendations %}
+                <li>{{ r }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

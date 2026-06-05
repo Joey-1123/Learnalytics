@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="dark">
+<head>
+    <title>Alerts | Learnalytics</title>
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="brand">
+                <div class="logo">L</div>
+                <div>
+                    <h1>Low Performance Alerts</h1>
+                    <p>Students below average threshold of {{ threshold }}</p>
+                </div>
+            </div>
+            <div class="actions">
+                <a class="btn outline" href="{% url 'teacher_dashboard' %}">Dashboard</a>
+                <form action="/logout/" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <form method="GET" class="search" style="margin-bottom:1rem;">
+                <label>Threshold:</label>
+                <input type="number" name="threshold" value="{{ threshold }}" min="0" max="100" style="width:80px;">
+                <button class="btn" type="submit">Apply</button>
+            </form>
+
+            {% if alerts %}
+            <table>
+                <tr>
+                    <th>Student</th>
+                    <th>Roll</th>
+                    <th>Average</th>
+                    <th>Action</th>
+                </tr>
+                {% for student, avg in alerts %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.roll_number }}</td>
+                    <td style="color:var(--orange);">{{ avg }}</td>
+                    <td><a class="link" href="{% url 'teacher_dashboard' %}?student_id={{ student.id }}">View Report</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No students below threshold.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

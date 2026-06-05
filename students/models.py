@@ -1,11 +1,31 @@
 import django.db
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
+
+
+class Grade(django.db.models.Model):
+    name = django.db.models.CharField(max_length=100)
+    section = django.db.models.CharField(max_length=10, blank=True)
+
+    class Meta:
+        unique_together = ("name", "section")
+        ordering = ["name", "section"]
+
+    def __str__(self):
+        return f"{self.name} {self.section}".strip()
 
 
 class Student(django.db.models.Model):
     name = django.db.models.CharField(max_length=100)
     roll_number = django.db.models.PositiveIntegerField(unique=True)
-
+    grade = django.db.models.ForeignKey(
+        Grade, on_delete=django.db.models.SET_NULL,
+        null=True, blank=True, related_name="students"
+    )
+    user = django.db.models.OneToOneField(
+        User, on_delete=django.db.models.CASCADE,
+        null=True, blank=True, related_name="student_profile"
+    )
     created_at = django.db.models.DateTimeField(auto_now_add=True)
 
     class Meta:

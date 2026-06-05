@@ -1,17 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="dark">
-
 <head>
     <title>Teacher Dashboard | Learnalytics</title>
     <link rel="stylesheet" href="{% static 'css/variables.css' %}">
     <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
 </head>
-
 <body>
-
     <div class="container">
-
         <div class="topbar">
             <div class="brand">
                 <div class="logo">L</div>
@@ -20,9 +16,9 @@
                     <p>KPIs, student search, reports, and charts</p>
                 </div>
             </div>
-
             <div class="actions">
                 <a class="btn outline" href="/">Home</a>
+                <a class="btn outline" href="{% url 'teacher_alerts' %}">Alerts</a>
                 <form action="/logout/" method="post" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn">Logout</button>
@@ -47,8 +43,13 @@
 
         <div class="card">
             <h2>Student Search</h2>
-
             <form method="GET" class="search">
+                <select name="grade">
+                    <option value="">All Grades</option>
+                    {% for g in grades %}
+                    <option value="{{ g.id }}" {% if grade_id == g.id|stringformat:"s" %}selected{% endif %}>{{ g }}</option>
+                    {% endfor %}
+                </select>
                 <input type="text" name="q" placeholder="Search student by name" value="{{ q }}">
                 <button class="btn" type="submit">Search</button>
             </form>
@@ -60,8 +61,8 @@
                 <ul>
                     {% for s in matched_students %}
                     <li>
-                        <b>{{ s.name }}</b> (Roll: {{ s.roll_number }})
-                        <a class="link" href="?q={{ q }}&student_id={{ s.id }}">View Report</a>
+                        <b>{{ s.name }}</b> (Roll: {{ s.roll_number }}){% if s.grade %} — {{ s.grade }}{% endif %}
+                        <a class="link" href="?q={{ q }}&student_id={{ s.id }}{% if grade_id %}&grade={{ grade_id }}{% endif %}">View Report</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -74,7 +75,14 @@
 
         {% if selected_student %}
         <div class="card">
-            <h2>Student Report: {{ selected_student.name }} (Roll: {{ selected_student.roll_number }})</h2>
+            <div class="card-head">
+                <h2>Student Report: {{ selected_student.name }} (Roll: {{ selected_student.roll_number }})</h2>
+                <div class="card-actions">
+                    {% if selected_student.grade %}<span>{{ selected_student.grade }}</span>{% endif %}
+                    <a class="link" href="{% url 'student_report_pdf' selected_student.id %}">Download PDF</a>
+                    <a class="link" href="/visualization/trend/{{ selected_student.id }}/" target="_blank">Trend Chart</a>
+                </div>
+            </div>
 
             <h3>Marks List</h3>
             {% if marks_list %}
@@ -118,6 +126,29 @@
         </div>
         {% endif %}
 
+        {% if alerts %}
+        <div class="card" style="border-left: 4px solid var(--orange);">
+            <h2>Low Performance Alerts</h2>
+            <table>
+                <tr>
+                    <th>Student</th>
+                    <th>Average</th>
+                    <th>Action</th>
+                </tr>
+                {% for student, avg in alerts|slice:":5" %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td style="color:var(--orange);">{{ avg }}</td>
+                    <td><a class="link" href="{% url 'student_report_pdf' student.id %}">PDF</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% if alerts|length > 5 %}
+            <p><a class="link" href="{% url 'teacher_alerts' %}">View all {{ alerts|length }} alerts</a></p>
+            {% endif %}
+        </div>
+        {% endif %}
+
         <div class="grid2">
             <div class="card">
                 <div class="card-head">
@@ -125,10 +156,8 @@
                     <div class="card-actions">
                         <a class="link btn-download" href="{% url 'download_chart' 'bar' %}">
                             <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                <path
-                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                             </svg>
                             Download
                         </a>
@@ -139,17 +168,14 @@
                     <img class="chart chart-small" src="/visualization/bar-chart/?v=1" alt="Bar chart">
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-head">
                     <h2>Marks Distribution Pie</h2>
                     <div class="card-actions">
                         <a class="link btn-download" href="{% url 'download_chart' 'pie' %}">
                             <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                <path
-                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                             </svg>
                             Download
                         </a>
@@ -161,9 +187,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </body>
-
 </html>

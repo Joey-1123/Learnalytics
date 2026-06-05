@@ -73,6 +73,12 @@ body {
 .choice.teacher {
     background: #06b6d4;
     color: #000000;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.choice.student {
+    background: #22c55e;
+    color: #000000;
 }
 
 /* Hover Triggers */
@@ -90,6 +96,10 @@ body {
 
 .choice.teacher:hover {
     background: #22d3ee;
+}
+
+.choice.student:hover {
+    background: #4ade80;
 }
 
 /* 3. TYPOGRAPHY & BUTTONS */

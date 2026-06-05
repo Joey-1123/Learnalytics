@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Report - {{ student.name }}</title>
+    <style>
+        body { font-family: sans-serif; padding: 30px; color: #1e293b; }
+        h1 { color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 8px; }
+        h2 { color: #334155; margin-top: 24px; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+        th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
+        th { background: #f1f5f9; }
+        .kpi { display: inline-block; margin: 8px 16px 8px 0; padding: 12px 20px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #06b6d4; }
+        .kpi-title { font-size: 12px; color: #64748b; text-transform: uppercase; }
+        .kpi-value { font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Student Report Card</h1>
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+    {% if student.grade %}<p><strong>Grade:</strong> {{ student.grade }}</p>{% endif %}
+
+    <div>
+        <div class="kpi"><div class="kpi-title">Risk Level</div><div class="kpi-value">{{ risk|upper }}</div></div>
+        <div class="kpi"><div class="kpi-title">Predicted Next Score</div><div class="kpi-value">{{ predicted_score }}</div></div>
+    </div>
+
+    <h2>Marks</h2>
+    <table>
+        <tr><th>Subject</th><th>Score</th></tr>
+        {% for m in marks %}<tr><td>{{ m.subject }}</td><td>{{ m.score }}</td></tr>{% endfor %}
+    </table>
+
+    <h2>Subject Summary</h2>
+    <table>
+        <tr><th>Subject</th><th>Entries</th><th>Average</th><th>Min</th><th>Max</th></tr>
+        {% for row in subject_report %}
+        <tr><td>{{ row.subject }}</td><td>{{ row.entries }}</td><td>{{ row.avg|floatformat:2 }}</td><td>{{ row.min_score }}</td><td>{{ row.max_score }}</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
