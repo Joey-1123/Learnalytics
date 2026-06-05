@@ -349,7 +349,9 @@
 ├── 📄 db.sqlite3
 ├── 🐍 manage.py
 ├── 📝 readme.md
-└── 📄 requirements.txt
+├── 📄 pyproject.toml
+├── 📄 uv.lock
+└── 📄 .gitignore
 ```
 
 ---

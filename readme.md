@@ -268,21 +268,21 @@ cd Learnalytics
 Install dependencies:
 
 ```
-pip install -r requirements.txt
+uv sync
 ```
 
 Run migrations:
 
 ```
-python manage.py makemigrations
-python manage.py migrate
+uv run python manage.py makemigrations
+uv run python manage.py migrate
 ```
 
 
 Run server:
 
 ```
-python manage.py runserver
+uv run python manage.py runserver
 ```
 
 Open:

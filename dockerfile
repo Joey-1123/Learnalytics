@@ -13,17 +13,20 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Copy dependency files
+COPY pyproject.toml uv.lock ./
 
 # Install dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN uv sync --no-dev --frozen
 
 # Copy project
 COPY . .
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN uv run python manage.py collectstatic --noinput
 
 # Run server
-CMD ["gunicorn", "learnalytics.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["uv", "run", "gunicorn", "learnalytics.wsgi:application", "--bind", "0.0.0.0:8000"]
