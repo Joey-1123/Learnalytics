@@ -202,7 +202,6 @@ learnalytics/
 ├── manage.py
 ├── pyproject.toml
 ├── uv.lock
-├── toggle_db.py              # Switch between PostgreSQL and SQLite
 │
 ├── learnalytics/
 │   ├── settings.py
@@ -248,7 +247,7 @@ learnalytics/
 │       ├── home.css
 │       └── teacher.css
 │
-└── db.sqlite3
+└── db.sqlite3 / Postgree  #based on local dev or production  update according to it
 ```
 
 ---
@@ -364,14 +363,11 @@ Current system uses simple statistical models. Future improvements could include
 ---
 
 ## Author
-
-```
-Shubham Panchal
+**Shubham Panchal** — [github.com/Joey-1123](https://github.com/Joey-1123)
 Student Developer | AI & Software Enthusiast
 
-Omkar Tamalwad
+**Omkar Tamalwad** — [github.com/Omii-004](https://github.com/Omii-004)
 Student Developer | AI Student
-```
 
 ## License
 
